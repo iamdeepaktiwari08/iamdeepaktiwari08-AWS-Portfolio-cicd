@@ -8,15 +8,16 @@
   <style>
     :root {
       --bg: #020617;
-      --bg-alt: #020617;
+      --bg-alt: #030712;
       --card: #020617;
       --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.18);
+      --accent-strong: #0ea5e9;
+      --accent-soft: rgba(56,189,248,0.18);
+      --accent-soft-2: rgba(129,140,248,0.25);
       --text-main: #e5e7eb;
       --text-muted: #9ca3af;
       --chip-bg: #020617;
       --border-subtle: #1f2937;
-      --danger: #ef4444;
       --success: #22c55e;
     }
 
@@ -26,11 +27,15 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top, rgba(56,189,248,0.2), transparent 50%),
-        radial-gradient(circle at bottom, rgba(129,140,248,0.16), transparent 55%),
+        radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(129,140,248,0.18), transparent 55%),
         #020617;
       color: var(--text-main);
       line-height: 1.6;
@@ -46,73 +51,73 @@
     }
 
     .page {
-      max-width: 1080px;
-      margin: 28px auto 64px;
+      max-width: 1100px;
+      margin: 24px auto 48px;
       padding: 0 16px;
     }
 
-    /* HEADER */
+    /* ========== HEADER ========== */
+
     header {
-      background: linear-gradient(135deg, #020617 0%, #0b1120 35%, #020617 100%);
-      border-radius: 18px;
-      border: 1px solid rgba(148,163,184,0.16);
-      padding: 26px 22px 20px;
-      box-shadow:
-        0 22px 40px rgba(15,23,42,0.7),
-        0 0 0 1px rgba(15,23,42,0.75) inset;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
       position: relative;
+      border-radius: 20px;
+      padding: 24px 22px 20px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56,189,248,0.25), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(129,140,248,0.25), transparent 55%),
+        linear-gradient(135deg, #020617 0%, #020617 40%, #020617 100%);
+      border: 1px solid rgba(148,163,184,0.45);
+      box-shadow:
+        0 18px 45px rgba(15,23,42,0.9),
+        0 0 0 1px rgba(15,23,42,0.9) inset;
       overflow: hidden;
-      animation: floatUp 0.6s ease-out;
+      animation: floatUp 0.7s ease-out;
     }
 
-    header::before {
+    header::after {
       content: "";
       position: absolute;
-      inset: -40%;
+      inset: 0;
       background:
-        radial-gradient(circle at 0 0, rgba(56,189,248,0.18), transparent 55%),
-        radial-gradient(circle at 100% 20%, rgba(14,165,233,0.18), transparent 55%);
-      opacity: 0.7;
-      pointer-events: none;
+        radial-gradient(circle at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(129,140,248,0.18), transparent 55%);
       mix-blend-mode: screen;
+      opacity: 0.55;
+      pointer-events: none;
     }
 
-    .header-main {
+    .header-inner {
       position: relative;
       z-index: 1;
       display: flex;
       flex-wrap: wrap;
+      gap: 18px;
       justify-content: space-between;
-      gap: 16px;
       align-items: flex-start;
     }
 
-    .heading-block h1 {
+    .header-main h1 {
       font-size: clamp(2.1rem, 3vw, 2.6rem);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
     }
 
-    .heading-block h2 {
+    .header-main h2 {
       font-size: 1rem;
-      font-weight: 500;
-      color: var(--accent);
       margin-top: 4px;
+      color: var(--accent-strong);
     }
 
-    .tagline {
+    .header-tagline {
+      margin-top: 8px;
       font-size: 0.9rem;
       color: var(--text-muted);
-      margin-top: 6px;
-      max-width: 480px;
+      max-width: 600px;
     }
 
     .header-actions {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       align-items: flex-start;
     }
 
@@ -120,27 +125,31 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 20px;
+      padding: 9px 20px;
       border-radius: 999px;
-      border: none;
-      background: #0a66c2;
+      border: 1px solid rgba(191,219,254,0.8);
+      background: linear-gradient(135deg, #0a66c2, #1d4ed8);
       color: #fff;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
-      box-shadow: 0 10px 20px rgba(15,23,42,0.7);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      box-shadow:
+        0 15px 30px rgba(15,23,42,0.9),
+        0 0 0 1px rgba(15,23,42,0.7) inset;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 16px 30px rgba(15,23,42,0.9);
-      background: #0b5ab0;
+      box-shadow:
+        0 20px 40px rgba(15,23,42,0.95),
+        0 0 0 1px rgba(15,23,42,0.7) inset;
+      filter: brightness(1.05);
     }
 
     .mini-links {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
     }
 
@@ -153,174 +162,157 @@
       z-index: 1;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 18px;
-      font-size: 0.86rem;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-top: 4px;
     }
 
     .meta-pill {
-      padding: 4px 10px;
+      padding: 5px 11px;
       border-radius: 999px;
       background: rgba(15,23,42,0.8);
-      border: 1px solid rgba(148,163,184,0.25);
+      border: 1px solid rgba(148,163,184,0.5);
+      backdrop-filter: blur(12px);
     }
 
-    /* SECTIONS */
+    /* ========== SECTIONS ========== */
+
     main {
-      margin-top: 22px;
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
       gap: 18px;
     }
 
     section {
-      background: rgba(15,23,42,0.96);
-      border-radius: 16px;
-      border: 1px solid var(--border-subtle);
-      padding: 18px 18px 16px;
-      animation: floatUp 0.6s ease-out;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 70%), #020617;
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 16px 18px 14px;
+      box-shadow: 0 16px 35px rgba(15,23,42,0.75);
+      animation: floatUp 0.7s ease-out;
       animation-fill-mode: both;
     }
 
     section:nth-of-type(1) { animation-delay: 0.05s; }
-    section:nth-of-type(2) { animation-delay: 0.08s; }
-    section:nth-of-type(3) { animation-delay: 0.11s; }
-    section:nth-of-type(4) { animation-delay: 0.14s; }
-    section:nth-of-type(5) { animation-delay: 0.17s; }
+    section:nth-of-type(2) { animation-delay: 0.09s; }
+    section:nth-of-type(3) { animation-delay: 0.13s; }
+    section:nth-of-type(4) { animation-delay: 0.17s; }
 
     .section-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      letter-spacing: 0.14em;
+      font-size: 0.9rem;
       text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #e5e7eb;
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #e5e7eb;
+      margin-bottom: 8px;
     }
 
     .section-title span.bar {
       display: block;
-      width: 30px;
+      width: 28px;
       height: 2px;
       border-radius: 999px;
-      background: var(--accent);
+      background: linear-gradient(90deg, var(--accent), var(--accent-soft-2));
     }
 
     .about-text {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
     }
+
+    /* ========== SKILLS ========== */
 
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
+      gap: 7px;
+      margin-top: 4px;
     }
 
     .chip {
-      padding: 5px 11px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: var(--chip-bg);
-      border: 1px solid rgba(148,163,184,0.25);
-      font-size: 0.84rem;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(148,163,184,0.45);
+      font-size: 0.8rem;
       color: var(--text-muted);
+      box-shadow: 0 6px 10px rgba(15,23,42,0.85);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.4fr);
-      gap: 18px;
+    .chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(15,23,42,0.95);
+      border-color: rgba(56,189,248,0.9);
+      background: radial-gradient(circle at top, rgba(56,189,248,0.16), #020617 60%);
+      color: #e5e7eb;
     }
 
-    .item {
-      margin-bottom: 10px;
-    }
+    /* ========== PROJECTS ========== */
 
-    .item-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .item-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .item-bullets {
-      margin-top: 6px;
-      padding-left: 18px;
-      font-size: 0.86rem;
-      color: var(--text-muted);
-    }
-
-    .item-bullets li + li {
-      margin-top: 3px;
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 2px 8px;
-      font-size: 0.78rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.28);
-      color: var(--text-muted);
-      margin-left: 4px;
-    }
-
-    /* PROJECT CARDS */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
 
-    @media (max-width: 960px) {
-      .projects-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    @media (max-width: 900px) {
+      .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 640px) {
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
+      .projects-grid { grid-template-columns: 1fr; }
     }
 
     .project-card {
-      background: radial-gradient(circle at top left, var(--accent-soft), transparent 55%);
-      border-radius: 14px;
-      border: 1px solid rgba(148,163,184,0.32);
-      padding: 12px 12px 11px;
       position: relative;
       overflow: hidden;
-      transition:
-        transform 0.16s ease-out,
-        box-shadow 0.16s ease-out,
-        border-color 0.16s ease-out,
-        background 0.16s ease-out;
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,0.55);
+      background:
+        radial-gradient(circle at top left, var(--accent-soft), transparent 60%),
+        rgba(15,23,42,0.98);
+      padding: 11px 11px 10px;
+      box-shadow: 0 15px 28px rgba(15,23,42,0.95);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
       cursor: default;
     }
 
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 110% 0%, rgba(56,189,248,0.24), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
     .project-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 30px rgba(15,23,42,0.9);
-      border-color: rgba(56,189,248,0.8);
-      background: radial-gradient(circle at top right, rgba(56,189,248,0.28), transparent 60%);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 25px 40px rgba(15,23,42,0.98);
+      border-color: rgba(56,189,248,0.9);
+      background:
+        radial-gradient(circle at top right, rgba(56,189,248,0.28), transparent 65%),
+        rgba(15,23,42,0.98);
+    }
+
+    .project-card:hover::after {
+      opacity: 0.9;
     }
 
     .project-name {
-      font-size: 0.94rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .project-desc {
-      font-size: 0.83rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       margin-bottom: 6px;
     }
@@ -329,31 +321,47 @@
       display: flex;
       flex-wrap: wrap;
       gap: 4px;
-      font-size: 0.76rem;
+      font-size: 0.73rem;
+      margin-bottom: 5px;
     }
 
     .project-tag {
       padding: 2px 7px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.94);
-      border: 1px solid rgba(148,163,184,0.45);
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.55);
       color: var(--text-muted);
     }
 
     .project-meta-link {
-      font-size: 0.8rem;
-      margin-top: 4px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
 
-    /* CONTACT FORM */
+    .project-meta-link code {
+      font-size: 0.75rem;
+      background: rgba(15,23,42,0.9);
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+    }
+
+    /* ========== CONTACT ========== */
+
     .contact-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
       gap: 16px;
     }
 
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .contact-text {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
     }
 
@@ -363,29 +371,33 @@
     }
 
     label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--text-muted);
     }
 
-    input, textarea {
+    input,
+    textarea {
       width: 100%;
-      margin-top: 3px;
+      margin-top: 4px;
       padding: 8px 10px;
       border-radius: 8px;
       border: 1px solid var(--border-subtle);
-      background: #020617;
+      background: rgba(2,6,23,0.98);
       color: var(--text-main);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, transform 0.12s ease;
+      box-shadow: 0 10px 20px rgba(15,23,42,0.85);
     }
 
-    input:focus, textarea:focus {
+    input:focus,
+    textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(56,189,248,0.6);
+      box-shadow: 0 0 0 1px rgba(56,189,248,0.8);
       background: #020617;
+      transform: translateY(-1px);
     }
 
     textarea {
@@ -399,38 +411,21 @@
       justify-content: center;
       padding: 8px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      background: #020617;
+      border: 1px solid rgba(148,163,184,0.8);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.2), #020617);
       color: var(--text-main);
       font-weight: 500;
-      font-size: 0.9rem;
+      font-size: 0.86rem;
       cursor: pointer;
-      transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+      transition: background 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+      box-shadow: 0 16px 28px rgba(15,23,42,0.9);
     }
 
     .btn-secondary:hover {
-      background: #020617;
+      background: radial-gradient(circle at top, rgba(56,189,248,0.32), #020617);
       transform: translateY(-1px);
-      box-shadow: 0 12px 20px rgba(15,23,42,0.7);
-    }
-
-    .form-note {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 3px;
-    }
-
-    .status {
-      margin-top: 6px;
-      font-size: 0.8rem;
-    }
-
-    .status.success {
-      color: var(--success);
-    }
-
-    .status.error {
-      color: var(--danger);
+      box-shadow: 0 22px 34px rgba(15,23,42,0.98);
+      border-color: rgba(56,189,248,0.9);
     }
 
     footer {
@@ -440,11 +435,12 @@
       text-align: center;
     }
 
-    /* ANIMATIONS */
+    /* ========== ANIMATIONS ========== */
+
     @keyframes floatUp {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(12px);
       }
       to {
         opacity: 1;
@@ -453,15 +449,11 @@
     }
 
     @media (max-width: 900px) {
-      .two-col,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
       header {
-        padding: 22px 16px 18px;
+        padding: 20px 16px 18px;
       }
       section {
-        padding: 16px 14px 14px;
+        padding: 14px 14px 12px;
       }
     }
   </style>
@@ -469,15 +461,14 @@
 <body>
 <div class="page">
 
-  <!-- HEADER -->
+  <!-- ======= HEADER ======= -->
   <header>
-    <div class="header-main">
-      <div class="heading-block">
+    <div class="header-inner">
+      <div class="header-main">
         <h1>Deepak Tiwari</h1>
         <h2>Cloud &amp; DevOps Engineer</h2>
-        <p class="tagline">
-          I build automated CI/CD pipelines, cloud-native infrastructure and production-ready environments on AWS,
-          with a focus on reliability, scalability and clean DevOps practices.
+        <p class="header-tagline">
+          Cloud &amp; DevOps Engineer | 2x Red Hat Certified (RHCSA, RHCE) | AWS | Docker | Jenkins | Git &amp; GitHub | Kubernetes | CI/CD | Shell Scripting | Python
         </p>
       </div>
 
@@ -497,13 +488,13 @@
     <div class="header-meta">
       <span class="meta-pill">📍 Indore, Madhya Pradesh, India</span>
       <span class="meta-pill">📞 +91 96856 66644</span>
-      <span class="meta-pill">☁️ AWS · Docker · Kubernetes · Ansible · CI/CD</span>
+      <span class="meta-pill">☁️ AWS · Docker · Jenkins · Kubernetes · CI/CD</span>
     </div>
   </header>
 
   <main>
 
-    <!-- ABOUT -->
+    <!-- ======= ABOUT ======= -->
     <section>
       <div class="section-title">
         <span class="bar"></span> About
@@ -511,70 +502,82 @@
       <p class="about-text">
         I’m a Cloud &amp; DevOps Engineer focused on building automated infrastructure and CI/CD pipelines on AWS.
         I enjoy working with Linux, containers, GitHub Actions, and configuration management tools to make deployments
-        consistent and repeatable. I’m continuously learning and practicing with hands-on projects like portfolio CI/CD,
-        VPC architectures and Ansible-based automation.
+        consistent and repeatable. I’m continuously learning and practicing with hands-on projects like AWS portfolio CI/CD,
+        VPC architectures, and Ansible-based automation.
       </p>
     </section>
 
-    <!-- SKILLS & CERTS -->
-    <section class="two-col">
-      <div>
-        <div class="section-title">
-          <span class="bar"></span> Skills
-        </div>
-        <div class="item">
-          <div class="item-title">Cloud &amp; Platform</div>
-          <div class="chips">
-            <span class="chip">AWS (EC2, S3, IAM, VPC, CloudWatch)</span>
-            <span class="chip">Linux (RHEL, Ubuntu)</span>
-            <span class="chip">Networking &amp; Security Groups</span>
-          </div>
-        </div>
-        <div class="item">
-          <div class="item-title">DevOps &amp; Automation</div>
-          <div class="chips">
-            <span class="chip">Git &amp; GitHub</span>
-            <span class="chip">GitHub Actions (CI/CD)</span>
-            <span class="chip">Docker</span>
-            <span class="chip">Kubernetes (basics)</span>
-            <span class="chip">Ansible</span>
-            <span class="chip">Shell Scripting</span>
-            <span class="chip">Monitoring Basics</span>
-          </div>
-        </div>
+    <!-- ======= SKILLS ======= -->
+    <section>
+      <div class="section-title">
+        <span class="bar"></span> Skills
       </div>
-
-      <div>
-        <div class="section-title">
-          <span class="bar"></span> Certifications &amp; Training
-        </div>
-        <div class="item">
-          <div class="item-title">Red Hat Certified System Administrator (RHCSA / EX200)</div>
-          <div class="item-sub">Completed</div>
-        </div>
-        <div class="item">
-          <div class="item-title">Red Hat Certified Engineer (RHCE / EX294)</div>
-          <div class="item-sub">Completed</div>
-        </div>
-        <div class="item">
-          <div class="item-title">DevOps Architect Master’s Training Program</div>
-          <div class="item-sub">Intellipaat &mdash; Ongoing</div>
-        </div>
+      <div class="chips">
+        <span class="chip">AWS</span>
+        <span class="chip">EC2</span>
+        <span class="chip">S3</span>
+        <span class="chip">VPC</span>
+        <span class="chip">Docker</span>
+        <span class="chip">Jenkins</span>
+        <span class="chip">Git</span>
+        <span class="chip">GitHub</span>
+        <span class="chip">GitHub Actions (CI/CD)</span>
+        <span class="chip">Kubernetes</span>
+        <span class="chip">Linux (RHEL / Ubuntu)</span>
+        <span class="chip">Shell Scripting</span>
+        <span class="chip">Python</span>
       </div>
     </section>
 
-    <!-- PROJECT CARDS -->
+    <!-- ======= PROJECTS ======= -->
     <section>
       <div class="section-title">
         <span class="bar"></span> Projects
       </div>
 
       <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-name">Hospital-VPC-SNS</div>
+          <div class="project-desc">
+            Capstone project to design a secure patient-record delivery workflow using AWS VPC and SNS.
+            Focus on isolation, security groups and notification-based updates.
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">AWS VPC</span>
+            <span class="project-tag">SNS</span>
+            <span class="project-tag">Security Groups</span>
+            <span class="project-tag">DevOps Lab</span>
+          </div>
+          <div class="project-meta-link">
+            📄 Capstone Project — Intellipaat
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-name">VPC Architecture</div>
+          <div class="project-desc">
+            Multi-tier AWS VPC design with public/private subnets, NAT Gateway, Internet Gateway, route tables
+            and EC2 workloads for secure access patterns.
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">AWS VPC</span>
+            <span class="project-tag">NAT Gateway</span>
+            <span class="project-tag">EC2</span>
+            <span class="project-tag">Networking</span>
+          </div>
+          <div class="project-meta-link">
+            🧩 AWS VPC Case Study — Intellipaat
+          </div>
+        </div>
+
+        <!-- Project 3 -->
         <div class="project-card">
           <div class="project-name">AWS Portfolio Website with CI/CD</div>
           <div class="project-desc">
-            Static portfolio site hosted on S3 with automated deployments from GitHub using GitHub Actions. Every push
-            to the main branch updates the live website with no manual steps.
+            Personal portfolio hosted on S3 and deployed via GitHub Actions CI/CD.
+            Every push to <code>main</code> automatically updates the live website.
           </div>
           <div class="project-tags">
             <span class="project-tag">AWS S3</span>
@@ -583,67 +586,14 @@
             <span class="project-tag">Static Hosting</span>
           </div>
           <div class="project-meta-link">
-            🔗 Deployed via: <code>iamdeepaktiwari08-AWS-Portfolio-cicd</code>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-name">Ansible Automation – Apache &amp; firewall</div>
-          <div class="project-desc">
-            Automated installation and configuration of Apache and firewall rules across Linux servers using Ansible
-            roles with idempotent and reusable playbooks.
-          </div>
-          <div class="project-tags">
-            <span class="project-tag">Ansible</span>
-            <span class="project-tag">Linux</span>
-            <span class="project-tag">Automation</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-name">AWS VPC Multi-tier Architecture (Lab)</div>
-          <div class="project-desc">
-            Designed a multi-tier VPC layout with public and private subnets, route tables, NAT, and security groups
-            as part of DevOps cloud training projects.
-          </div>
-          <div class="project-tags">
-            <span class="project-tag">AWS VPC</span>
-            <span class="project-tag">EC2</span>
-            <span class="project-tag">Networking</span>
+            🔗 Repo: <code>iamdeepaktiwari08-AWS-Portfolio-cicd</code>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- EDUCATION / EXTRA -->
-    <section class="two-col">
-      <div>
-        <div class="section-title">
-          <span class="bar"></span> Education
-        </div>
-        <div class="item">
-          <div class="item-title">DevOps Architect Master’s Training Program</div>
-          <div class="item-sub">Intellipaat &mdash; Ongoing</div>
-        </div>
-        <div class="item">
-          <div class="item-title">B.Com (Plain)</div>
-          <div class="item-sub">Sardar Patel University · 2022</div>
-        </div>
-      </div>
-      <div>
-        <div class="section-title">
-          <span class="bar"></span> Quick Info
-        </div>
-        <div class="item-sub">
-          <div>📅 Date of Birth: 8th November 2001</div>
-          <div>🌐 Languages: English, Hindi</div>
-          <div>📍 Based in Indore, open to relocation.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section>
+    <!-- ======= CONTACT ======= -->
+    <section id="contact">
       <div class="section-title">
         <span class="bar"></span> Contact
       </div>
@@ -651,7 +601,7 @@
       <div class="contact-grid">
         <div>
           <p class="contact-text">
-            Want to talk about Cloud, DevOps, or a role opportunity?  
+            Want to talk about Cloud, DevOps, or a role opportunity?
             Reach out by email or send a quick message using this form.
           </p>
           <p class="contact-text" style="margin-top:6px;">
@@ -662,26 +612,26 @@
         </div>
 
         <div>
-          <form id="contact-form">
+          <!-- FormSubmit contact form -->
+          <form action="https://formsubmit.co/imdeepaktiwari08@gmail.com" method="POST">
             <div>
               <label for="name">Name</label>
-              <input id="name" type="text" placeholder="Your name" required />
+              <input id="name" name="name" type="text" placeholder="Your name" required />
             </div>
             <div>
               <label for="email">Email</label>
-              <input id="email" type="email" placeholder="your@email.com" required />
+              <input id="email" name="email" type="email" placeholder="your@email.com" required />
             </div>
             <div>
               <label for="message">Message</label>
-              <textarea id="message" placeholder="Write your message..." required></textarea>
+              <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
             </div>
             <div>
-              <button type="submit" class="btn-secondary">Send Message (demo)</button>
-              <div class="form-note">
-                This is a front-end demo form. You can connect it later to a backend or service like AWS SES / Forms.
-              </div>
-              <div id="form-status" class="status"></div>
+              <button type="submit" class="btn-secondary">Send Message</button>
             </div>
+
+            <!-- FormSubmit options -->
+            <input type="hidden" name="_captcha" value="false" />
           </form>
         </div>
       </div>
@@ -694,17 +644,5 @@
   </footer>
 </div>
 
-<script>
-  // Simple front-end demo handler for contact form
-  const form = document.getElementById("contact-form");
-  const statusEl = document.getElementById("form-status");
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    statusEl.textContent = "Thanks, your message is recorded on this demo UI.";
-    statusEl.className = "status success";
-    form.reset();
-  });
-</script>
 </body>
 </html>
